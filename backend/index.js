@@ -1,8 +1,11 @@
-const express = require('express')
-const cors = require('cors')
-const products = require('./data/products')
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import products from './data/products.js'
 
-const productsRouter = require('./routes/products')
+import productsRouter from './routes/products.js'
+
+dotenv.config()
 
 const app = express()
 
@@ -12,4 +15,4 @@ app.use(cors())
 
 app.use('/api/products', productsRouter)
 
-app.listen(PORT, console.log(`Server runnig on port ${PORT}`))
+app.listen(PORT, console.log(`Server runnig in ${process.env.NODE_ENV} mode on port ${PORT}`))

@@ -1,5 +1,5 @@
-const { Router } = require('express')
-const products = require('../data/products')
+import { Router } from 'express'
+import products from '../data/products.js'
 
 const router = Router()
 
@@ -13,4 +13,4 @@ router.get('/:id', (req, res) => {
   res.json(product)
 })
 
-module.exports = router
+export default router

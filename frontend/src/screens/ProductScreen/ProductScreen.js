@@ -6,16 +6,17 @@ import Rating from '../../components/ProductItem/Rating'
 import { BASE_URL } from '../../constants/general'
 
 const ProductScreen = ({ match }) => {
+  const { id } = match.params
   const [product, setProduct] = useState({})
 
   const fetchProducts = async () => {
-    const { data } = await axios(`${BASE_URL}/api/products/${match.params.id}`)
+    const { data } = await axios(`${BASE_URL}/api/products/${id}`)
     setProduct(data)
   }
 
   useEffect(() => {
     fetchProducts()
-  }, [])
+  }, [match])
 
   const {
     image,
