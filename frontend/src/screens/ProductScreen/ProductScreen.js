@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../../components/ProductItem/Rating'
-import products from '../../products'
+import { BASE_URL } from '../../constants/general'
 
 const ProductScreen = ({ match }) => {
+  const [product, setProduct] = useState({})
+
+  const fetchProducts = async () => {
+    const { data } = await axios(`${BASE_URL}/api/products/${match.params.id}`)
+    setProduct(data)
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
   const {
     image,
     name,
@@ -13,7 +25,7 @@ const ProductScreen = ({ match }) => {
     price,
     description,
     countInStock
-  } = products.find(item => item._id === match.params.id)
+  } = product
 
   return (
     <>
