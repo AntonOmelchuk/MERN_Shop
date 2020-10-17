@@ -1,6 +1,6 @@
-import mogoose from 'mongoose'
+import mongoose from 'mongoose'
 
-const UserSchema = mogoose.Schema({
+const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -23,6 +23,6 @@ const UserSchema = mogoose.Schema({
   timestamps: true
 })
 
-const User = mogoose.model('User', UserSchema)
+const User = mongoose.model('User', UserSchema)
 
 export default User
