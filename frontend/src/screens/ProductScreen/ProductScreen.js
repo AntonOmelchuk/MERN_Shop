@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../../components/ProductItem/Rating'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchDetails } from '../../actions/productActions'
 import Loader from '../../components/Loader/Loader'
 import Message from '../../components/Message/Message'
+import { addItemToCart } from '../../actions/cartActions'
+import Select from '../../components/Select/Select'
 
 const ProductScreen = ({ history, match }) => {
   const { id } = match.params
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
 
   const { details, loading, error } = useSelector((state) => state.productsList)
@@ -18,19 +20,9 @@ const ProductScreen = ({ history, match }) => {
     dispatch(fetchDetails(id))
   }, [dispatch, id])
 
-  const addToCartHandler = () => {
-    history.push(`/cart/${id}?qty=${qty}`)
-  }
+  const addToCartHandler = () => dispatch(addItemToCart(id, qty, () => history.push(`/cart/${id}?qty=${qty}`)))
 
-  const {
-    image,
-    name,
-    rating,
-    numReviews,
-    price,
-    description,
-    countInStock,
-  } = details
+  const { image, name, rating, numReviews, price, description, countInStock } = details
 
   return (
     <>
@@ -82,31 +74,14 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Qty</Col>
                       <Col>
-                        <Form.Control
-                          as='select'
-                          value={qty}
-                          onChange={(e) => {
-                            setQty(e.target.value)
-                          }}
-                        >
-                          {Array.from(Array(countInStock).keys()).map((i) => (
-                            <option key={i} value={i + 1}>
-                              {i + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
+                        <Select qty={qty} selectCounts={countInStock} onChangehandler={(e) => setQty(e.target.value)} />
                       </Col>
                     </Row>
                   </ListGroup.Item>
                 )}
 
                 <ListGroup.Item>
-                  <Button
-                    onClick={addToCartHandler}
-                    className='btn-block'
-                    type='button'
-                    disabled={countInStock === 0}
-                  >
+                  <Button onClick={addToCartHandler} className='btn-block' type='button' disabled={countInStock === 0}>
                     ADD TO CART
                   </Button>
                 </ListGroup.Item>
