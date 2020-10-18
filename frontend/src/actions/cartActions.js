@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM } from '../constants/actionTypes'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/actionTypes'
 import axios from 'axios'
 import { BASE_URL } from '../constants/general'
 
@@ -25,4 +25,10 @@ export const addItemToCart = (id, qty, callback, noPlus) => async (dispatch, get
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
   if (callback) callback()
+}
+
+export const removeCartItem = id => (dispatch, getState) => {
+  dispatch({ type: CART_REMOVE_ITEM, payload: id })
+
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }

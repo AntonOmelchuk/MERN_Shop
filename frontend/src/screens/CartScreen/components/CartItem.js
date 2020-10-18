@@ -2,14 +2,12 @@ import React from 'react'
 import { Button, Col, Image, Row } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addItemToCart } from '../../../actions/cartActions'
+import { addItemToCart, removeCartItem } from '../../../actions/cartActions'
 import Select from '../../../components/Select/Select'
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch()
   const { id, name, price, qty, image, countInStock } = item
-
-  const removeItem = (id) => {}
 
   return (
     <Row className='my-3'>
@@ -24,11 +22,11 @@ const CartItem = ({ item }) => {
         <Select
           selectCounts={countInStock}
           qty={qty}
-          onChangehandler={(e) => dispatch(addItemToCart(id, e.target.value, () => {}, true))}
+          onChangehandler={e => dispatch(addItemToCart(id, e.target.value, () => {}, true))}
         />
       </Col>
       <Col md={2}>
-        <Button type='button' variant='light' onClick={() => removeItem(id)}>
+        <Button type='button' variant='light' onClick={() => dispatch(removeCartItem(id))}>
           <i className='fas fa-trash' />
         </Button>
       </Col>
