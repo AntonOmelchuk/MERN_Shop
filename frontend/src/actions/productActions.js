@@ -2,8 +2,8 @@ import axios from 'axios'
 import {
   START_REQUEST,
   PRODUCT_LIST_SUCCESS,
-  REQUEST_FAIL,
   PRODUCT_DETAILS_SUCCESS,
+  REQUEST_FAIL,
 } from '../constants/actionTypes'
 import { BASE_URL } from '../constants/general'
 

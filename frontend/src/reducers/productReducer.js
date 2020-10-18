@@ -3,7 +3,6 @@ import {
   PRODUCT_LIST_SUCCESS,
   REQUEST_FAIL,
   PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
 } from '../constants/actionTypes'
 
 const initialState = {
