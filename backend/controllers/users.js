@@ -2,8 +2,8 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/user.js'
 import generateToken from '../utils/generateToken.js'
 
-// @desc  create new user
-// @route POST /api/users/
+// @desc   create new user
+// @route  POST /api/users
 // @access Public
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -23,12 +23,21 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (newUser) {
-    res.status(201).json({})
+    res.status(201).json({
+      _id: newUser._id,
+      name,
+      email,
+      isAdmin: newUser.isAdmin,
+      token: generateToken(newUser._id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
   }
 })
 
-// @desc  Auth user && get token
-// @route POST /api/users/login
+// @desc   Auth user && get token
+// @route  POST /api/users/login
 // @access Public
 
 const authUser = asyncHandler(async (req, res) => {
@@ -51,8 +60,8 @@ const authUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc  Get user profile
-// @route GET /api/users/profile
+// @desc   Get user profile
+// @route  GET /api/users/profile
 // @access Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -73,4 +82,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser, getUserProfile }
+export { authUser, getUserProfile, registerUser }
