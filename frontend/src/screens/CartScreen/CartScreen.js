@@ -5,10 +5,11 @@ import Message from '../../components/Message/Message'
 import CartItem from './components/CartItem'
 
 const CartScreen = ({ history }) => {
-  const { cartItems } = useSelector((state) => state.cart)
+  const { cartItems } = useSelector(state => state.cart)
+  const { user } = useSelector(state => state.user)
 
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
+    history.push(user ? '/shipping' : '/login')
   }
 
   return (
@@ -19,7 +20,7 @@ const CartScreen = ({ history }) => {
           <Message text='Your cart is empty' />
         ) : (
           <ListGroup variatn='flush'>
-            {cartItems.map((item) => (
+            {cartItems.map(item => (
               <CartItem key={item.id} item={item} />
             ))}
           </ListGroup>
