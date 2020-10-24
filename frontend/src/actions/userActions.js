@@ -1,11 +1,5 @@
 import axios from 'axios'
-import {
-  START_REQUEST,
-  USER_LOGIN_SUCCESS,
-  REQUEST_FAIL,
-  USER_LOGOUT,
-  USER_REGISTER_SUCCESS,
-} from '../constants/actionTypes'
+import { START_REQUEST, USER_LOGIN_SUCCESS, REQUEST_FAIL, USER_LOGOUT } from '../constants/actionTypes'
 import { BASE_URL } from '../constants/general'
 
 export const login = (email, password) => async dispatch => {
@@ -52,7 +46,7 @@ export const register = (name, email, password) => async dispatch => {
     const { data } = await axios.post(`${BASE_URL}/api/users`, { name, email, password }, config)
 
     dispatch({
-      type: USER_REGISTER_SUCCESS,
+      type: USER_LOGIN_SUCCESS,
       payload: data,
     })
 

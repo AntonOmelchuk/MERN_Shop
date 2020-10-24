@@ -1,10 +1,4 @@
-import {
-  START_REQUEST,
-  USER_LOGIN_SUCCESS,
-  REQUEST_FAIL,
-  USER_LOGOUT,
-  USER_REGISTER_SUCCESS,
-} from '../constants/actionTypes'
+import { START_REQUEST, USER_LOGIN_SUCCESS, REQUEST_FAIL, USER_LOGOUT } from '../constants/actionTypes'
 
 const initialState = {
   loading: false,
@@ -19,7 +13,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       }
-    case (USER_LOGIN_SUCCESS, USER_REGISTER_SUCCESS):
+    case USER_LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
