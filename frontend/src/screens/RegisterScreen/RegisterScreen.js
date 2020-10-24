@@ -70,7 +70,7 @@ const RegisterScreen = ({ history }) => {
           />
         </Form.Group>
 
-        <Button type='submit' variant='primary' disabled={loading}>
+        <Button type='submit' variant='primary'>
           Register
         </Button>
       </Form>

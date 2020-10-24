@@ -65,11 +65,12 @@ const authUser = asyncHandler(async (req, res) => {
 // @access Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
-  const { _id, name, email, isAdmin } = req.user
-
-  const user = await User.findById(_id)
+  console.log('req: ', req.user)
+  const user = await User.findById(req.user._id)
 
   if (user) {
+    const { _id, name, email, isAdmin } = user
+
     res.json({
       _id,
       name,
@@ -88,6 +89,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   const { name, email } = req.body
+
   const user = await User.findById(req.user._id)
 
   if (user) {

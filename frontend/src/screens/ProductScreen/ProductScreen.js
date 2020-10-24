@@ -14,7 +14,7 @@ const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
 
-  const { details, loading, error } = useSelector((state) => state.productsList)
+  const { details, loading, error } = useSelector(state => state.productsList)
 
   useEffect(() => {
     dispatch(fetchDetails(id))
@@ -32,7 +32,7 @@ const ProductScreen = ({ history, match }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger' text={error} />
+        <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
           <Col md={6}>
@@ -74,7 +74,7 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Qty</Col>
                       <Col>
-                        <Select qty={qty} selectCounts={countInStock} onChangehandler={(e) => setQty(e.target.value)} />
+                        <Select qty={qty} selectCounts={countInStock} onChangehandler={e => setQty(e.target.value)} />
                       </Col>
                     </Row>
                   </ListGroup.Item>

@@ -1,9 +1,16 @@
-import { START_REQUEST, USER_LOGIN_SUCCESS, REQUEST_FAIL, USER_LOGOUT } from '../constants/actionTypes'
+import {
+  START_REQUEST,
+  USER_LOGIN_SUCCESS,
+  REQUEST_FAIL,
+  USER_LOGOUT,
+  UPDATE_USER_PROFILE,
+} from '../constants/actionTypes'
 
 const initialState = {
   loading: false,
-  error: undefined,
-  user: undefined,
+  error: null,
+  user: null,
+  success: null,
 }
 
 export default function (state = initialState, action) {
@@ -29,6 +36,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user: undefined,
+      }
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        user: action.payload,
       }
     default:
       return state
