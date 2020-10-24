@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_ADDRESS_DATA } from '../constants/actionTypes'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_ADDRESS_DATA, SAVE_PAYMENT_METHOD } from '../constants/actionTypes'
 import { addItemToCart } from '../helpers/utils'
 
 const initialState = {
@@ -22,6 +22,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         shippingAddress: action.payload,
+      }
+    case SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
       }
     default:
       return state

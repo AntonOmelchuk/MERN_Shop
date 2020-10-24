@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_ADDRESS_DATA } from '../constants/actionTypes'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_ADDRESS_DATA, SAVE_PAYMENT_METHOD } from '../constants/actionTypes'
 import axios from 'axios'
 import { BASE_URL } from '../constants/general'
 
@@ -33,8 +33,14 @@ export const removeCartItem = id => (dispatch, getState) => {
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
-export const saveShippingAddress = data => async dispatch => {
+export const saveShippingAddress = data => dispatch => {
   dispatch({ type: SAVE_ADDRESS_DATA, payload: data })
 
   localStorage.setItem('shippingAddress', JSON.stringify(data))
+}
+
+export const savePaymentMethod = data => dispatch => {
+  dispatch({ type: SAVE_PAYMENT_METHOD, payload: data })
+
+  localStorage.setItem('paymentMethod', JSON.stringify(data))
 }

@@ -9,3 +9,7 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+.title-paddings {
+  padding: 2rem 0;
+}
