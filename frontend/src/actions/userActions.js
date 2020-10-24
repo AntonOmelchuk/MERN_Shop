@@ -100,7 +100,7 @@ export const updateUserProfile = (name, email, password) => async (dispatch, get
     const {
       user: { user },
     } = getState()
-    console.log('token: ', user.token)
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
