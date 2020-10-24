@@ -1,8 +1,9 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/actionTypes'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_ADDRESS_DATA } from '../constants/actionTypes'
 import { addItemToCart } from '../helpers/utils'
 
 const initialState = {
   cartItems: [],
+  shippingAddress: {},
 }
 
 export default function (state = initialState, action) {
@@ -16,6 +17,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cartItems: state.cartItems.filter(item => item.id !== action.payload),
+      }
+    case SAVE_ADDRESS_DATA:
+      return {
+        ...state,
+        shippingAddress: action.payload,
       }
     default:
       return state
